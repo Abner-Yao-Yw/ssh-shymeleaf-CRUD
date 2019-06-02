@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <context:property-placeholder location="classpath:dataSources.properties"></context:property-placeholder>
+    <!--配置注解扫描器-->
+    <context:component-scan base-package="com.*"></context:component-scan>
+    <!--注解驱动@requesrMapping-->
+    <mvc:annotation-driven/>
+    <!--拦截静态资源-->
+    <mvc:default-servlet-handler/>
+    <!--配置thymeleaf-->
+    <bean id="springResourceTemplateResolver"
+          class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver">
+        <property name="prefix" value="/templates/"></property>
+        <property name="suffix" value=".html"></property>
+        <property name="cacheable" value="false"></property>
+        <property name="templateMode" value="HTML5"></property>
+        <property name="characterEncoding" value="UTF-8"></property>
+    </bean>
+    <bean id="springTemplateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
+        <property name="templateResolver" ref="springResourceTemplateResolver"></property>
+    </bean>
+    <bean id="thymeleafViewResolver" class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+        <property name="templateEngine" ref="springTemplateEngine"></property>
+        <property name="characterEncoding" value="UTF-8"></property>
+    </bean>
+    <!--配置Druid-->
+    <bean id="druidDataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="username" value="${user}"></property>
+        <property name="password" value="${password}"></property>
+        <property name="driverClassName" value="${driver}"></property>
+        <property name="url" value="${url}"></property>
+        <property name="initialSize" value="${initialSize}"></property>
+        <property name="minIdle" value="${minIdle}"></property>
+        <property name="maxActive" value="${maxActive}"></property>
+        <property name="maxWait" value="${maxWait}"></property>
+        <property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}"></property>
+        <property name="minEvictableIdleTimeMillis" value="${minEvictableIdleTimeMillis}"></property>
+    </bean>
+    <!--配置Hibernate-->
+    <bean id="SessionFactoryBean" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="druidDataSource"></property>
+        <property name="hibernateProperties">
+            <props >
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.connection.url">jdbc:mysql://localhost:3306/demo</prop>
+                <prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
+            </props>
+        </property>
+        <property name="mappingLocations">
+           <list>
+               <value>classpath:Student.hbm.xml</value>
+           </list>
+        </property>
+        <property name="annotatedClasses">
+            <list>
+                <value>com.enties.Student</value>
+            </list>
+        </property>
+    </bean>
+    <!--配置事务-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="druidDataSource"></property>
+    </bean>
+   <tx:annotation-driven transaction-manager="transactionManager"></tx:annotation-driven>
+
+</beans>

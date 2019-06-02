@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" th:action="@{'/student/edit/'+ ${sid} }" action="#">
+    <input type="hidden" th:name="${sid}" value="" ty/>
+    <br/>
+    姓名:&nbsp;&nbsp;<input type="text" name="name" value="" />
+    <br/>
+    性别:&nbsp;&nbsp;<input type="checkbox" name="sex" value="男"/>男
+    <input type="checkbox" name="sex" value="女"/>女
+    <br/>
+    出生日期:<input type="text" value="" name="birth"/>
+    <br/>
+    <input type="submit" value="提交"/>
+</form>
+</body>
+</html>

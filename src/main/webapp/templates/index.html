@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="../static/css/login.css" th:href="@{/static/css/login.css}"/>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.js"></script>
+    <script th:inline="javascript"  src="../static/js/login.js" th:src="@{/static/js/login.js}"></script>
+    <script th:inline="javascript" src="../static/js/query.js" th:src="@{/static/js/query.js}"></script>
+</head>
+<body>
+<div id="div">
+<<<<<<< HEAD
+    <form id="form" method="post">
+=======
+    <form id="form" method="post" enctype="multipart/form-data">
+>>>>>>> 第二次
+        学号:&nbsp;&nbsp;<input type="text" name="id" value=""/>
+        <br/>
+        姓名:&nbsp;&nbsp;<input type="text" name="name" value="" />
+        <br/>
+        性别:&nbsp;&nbsp;<input type="checkbox" name="sex" value="男"/>男
+        <input type="checkbox" name="sex" value="女"/>女
+        <br/>
+        出生日期:<input type="text" value="" name="birth"/>
+        <br/>
+<<<<<<< HEAD
+=======
+        头像:<input type="file" name="file"/>
+>>>>>>> 第二次
+        </form>
+    <button id="btn">登录</button>
+</div>
+    <a href="/springmvc/student/query" th:href="@{/student/query}">查询</a>
+    <table cellspacing="4" cellpadding="5" border="1">
+        <thead>
+        <tr>
+            <td>学号</td>
+            <td>姓名</td>
+            <td>性别</td>
+            <td>出生日期</td>
+            <td>删除</td>
+            <td>编辑</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="stu,userStat:${student}">
+            <td th:text="${stu.getId()}"/>
+            <td th:text="${stu.getName()}"/>
+            <td th:text="${stu.getSex()}"/>
+            <td th:text="${stu.getBirth()}"/>
+            <td><a href="#" th:href="@{'/student/del/'+ ${stu.getId()}}">delete</a></td>
+            <td><a href="#" th:href="@{'/student/get/'+ ${stu.getId()}}">edit</a></td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>
