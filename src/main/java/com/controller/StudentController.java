@@ -7,10 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-<<<<<<< HEAD
-=======
 import org.springframework.web.multipart.MultipartFile;
->>>>>>> 第二次
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -29,10 +26,6 @@ public class StudentController {
     public @ResponseBody
     Student add(@RequestParam("id") Integer id, @RequestParam("name") String name, @RequestParam("sex") String sex, @RequestParam("birth") Date birth) {
         System.out.println("test");
-<<<<<<< HEAD
-        student = new Student(id, name, sex, birth);
-=======
->>>>>>> 第二次
         System.out.println(student);
         studentService.addStudent(student);
         return student;
@@ -52,14 +45,8 @@ public class StudentController {
          return "redirect:/student/query";
     }
     @RequestMapping(value = "/edit/{id}",method = RequestMethod.POST)
-<<<<<<< HEAD
-    public String editStudent(@PathVariable Integer id,@RequestParam("name") String name, @RequestParam("sex") String sex, @RequestParam("birth") Date birth)
-    {
-        student=new Student(id,name,sex,birth);
-=======
     public String editStudent(@PathVariable Integer id, @RequestParam("name") String name, @RequestParam("sex") String sex, @RequestParam("birth") Date birth, @RequestParam("file") MultipartFile file)
     {
->>>>>>> 第二次
         System.out.println(student.toString());
         studentService.editStudent(student);
         return "redirect:/student/query";
@@ -67,6 +54,7 @@ public class StudentController {
     @RequestMapping(value = "/get/{id}",method = RequestMethod.GET)
     public String getId(@PathVariable Integer id, Model model)
     {
+        System.out.println(id);
         System.out.println(id);
         model.addAttribute("sid",id);
         return "edit";

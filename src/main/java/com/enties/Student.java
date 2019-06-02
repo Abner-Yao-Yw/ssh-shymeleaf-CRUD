@@ -1,14 +1,8 @@
 package com.enties;
 
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
-<<<<<<< HEAD
-
-=======
-import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Blob;
->>>>>>> 第二次
 import java.sql.Date;
 
 
@@ -18,8 +12,6 @@ public class Student{
     private String name;
     private String sex;
     private Date birth;
-<<<<<<< HEAD
-=======
     private Blob file;
 
     public void setFile(Blob file) {
@@ -30,7 +22,6 @@ public class Student{
         return file;
     }
 
->>>>>>> 第二次
     public Integer getId() {
         return id;
     }
@@ -68,23 +59,14 @@ public class Student{
     public Student() {
     }
 
-<<<<<<< HEAD
-    public Student(Integer id, String name, String sex, Date birth) {
-=======
     public Student(Integer id, String name, String sex, Date birth, Blob file) {
->>>>>>> 第二次
         this.id = id;
         this.name = name;
         this.sex = sex;
         this.birth = birth;
-<<<<<<< HEAD
-    }
-
-=======
         this.file = file;
     }
-    
->>>>>>> 第二次
+
     @Override
     public String toString() {
         return "Student{" +
@@ -92,10 +74,7 @@ public class Student{
                 ", name='" + name + '\'' +
                 ", sex='" + sex + '\'' +
                 ", birth=" + birth +
-<<<<<<< HEAD
-=======
                 ", file=" + file +
->>>>>>> 第二次
                 '}';
     }
 }
